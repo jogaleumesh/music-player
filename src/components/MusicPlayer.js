@@ -1,14 +1,17 @@
 import "./MusicPlayer.css";
-
-function MusicPlayer() {
+function MusicPlayer({ song }) {
   return (
     <div className="music-player">
       <div className="song-info">
-        <h2>Ghost Stories</h2>
-        <p>Coldplay</p>
+        <h2>{song.name}</h2>
+        <p>{song.artist}</p>
       </div>
 
-      <div className="album-art"></div>
+      <img
+        src={`https://cms.samespace.com/assets/${song.cover}`}
+        alt={song.name}
+        className="album-art"
+      />
 
       <div className="player-controls">
         <div className="progress-bar">

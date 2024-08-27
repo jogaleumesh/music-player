@@ -1,0 +1,51 @@
+.music-player {
+  width: 480px;
+}
+
+.album-art {
+  width: 480px;
+  height: 480px;
+  background: url('https://akm-img-a-in.tosshub.com/indiatoday/images/media_bank/202309/chaleya-song-141618190-16x9.jpg?VersionId=7WQ6L3T.EHeLJ9xS4Vh53vAmNtxZ3fUf&size=690:388');
+  border-radius: 8px;
+  margin: 32px 0 24px;
+}
+
+.album-cover {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.song-info h2 {
+  font-size: 32px;
+  line-height: 36px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.song-info p {
+  font-size: 16px;
+  line-height: 24px;
+  opacity: 0.6;
+}
+
+
+.progress-bar {
+  background-color: #ffffff33;
+  height: 6px;
+  border-radius: 16px;
+  margin-bottom: 32px;
+  position: relative;
+  width: 100%;
+}
+
+.progress {
+  background-color: #fff;
+  height: 100%;
+  border-radius: 16px;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

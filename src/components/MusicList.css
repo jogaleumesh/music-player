@@ -1,0 +1,90 @@
+.tabs {
+  margin: 0 16px;
+  display: flex;
+  gap: 40px;
+}
+
+.tabs button {
+  height: 32px;
+  font-family: 'Inter';
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+  color: #FFFFFF;
+  opacity: 50%;
+}
+
+.tabs .active {
+  opacity: 100%;
+}
+
+.search-bar {
+  margin: 32px 16px 24px;
+  position: relative;
+}
+
+.search-bar input {
+  padding: 8px 16px;
+  width: 400px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  border: 0;
+  color: #fff;
+}
+
+.search-icon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #666;
+  pointer-events: none;
+}
+
+
+.song-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.song-item {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.active-song {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.song-image {
+  height: 48px;
+  width: 48px;
+  border-radius: 50%;
+  margin-right: 16px;
+}
+
+.song-info h4 {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.song-info p {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  opacity: 0.6;
+}
+
+.song-time {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  opacity: 0.6;
+  margin-left: auto;
+}

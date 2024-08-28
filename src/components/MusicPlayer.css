@@ -1,9 +1,10 @@
 .music-player {
   width: 480px;
+  margin: auto;
 }
 
 .album-art {
-  width: 480px;
+  width: 100%;
   height: 480px;
   border-radius: 8px;
   margin: 32px 0 24px;

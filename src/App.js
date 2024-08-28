@@ -93,6 +93,10 @@ function App() {
     >
       <div className="left-nav">
         <img src="/assets/logo.svg" alt="logo" />
+        <img
+          src="https://randomuser.me/api/portraits/men/32.jpg"
+          className="user-pic"
+        />
       </div>
 
       <div className="music-list">

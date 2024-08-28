@@ -7,7 +7,9 @@ import "./App.css";
 function App() {
   const [songsData, setSongsData] = useState([]);
   const [filteredSongs, setFilteredSongs] = useState([]);
+
   const [currentSong, setCurrentSong] = useState(null); // Current song
+  const [currentSongIndex, setCurrentSongIndex] = useState(0);
 
   const [activeTab, setActiveTab] = useState("forYou"); // Tab state
   const [searchQuery, setSearchQuery] = useState(""); // Search input state
@@ -25,6 +27,7 @@ function App() {
         // select the first song by default
         if (data.length > 0) {
           setCurrentSong(data[0]);
+          setCurrentSongIndex(0);
         }
       } catch (error) {
         console.error("Error fetching songs:", error);
@@ -37,6 +40,7 @@ function App() {
   // Function to change tab and filter songs
   const handleTabChange = (tab) => {
     setSearchQuery("");
+    setCurrentSongIndex(0);
     setActiveTab(tab);
 
     // Filter songs based on the tab
@@ -51,6 +55,7 @@ function App() {
   const handleSearchChange = (e) => {
     const query = e.target.value.toLowerCase();
     setSearchQuery(query);
+    setCurrentSongIndex(0);
 
     const filtered = songsData.filter(
       (song) =>
@@ -62,8 +67,23 @@ function App() {
   };
 
   // Function to handle song selection from the list
-  const handleSongClick = (song) => {
-    setCurrentSong(song);
+  const handleSongClick = (index) => {
+    setCurrentSongIndex(index);
+    setCurrentSong(filteredSongs[index]);
+  };
+
+  const handleNextSong = () => {
+    setCurrentSongIndex((prevIndex) =>
+      prevIndex === filteredSongs.length - 1 ? 0 : prevIndex + 1
+    );
+    setCurrentSong(filteredSongs[currentSongIndex]);
+  };
+
+  const handlePreviousSong = () => {
+    setCurrentSongIndex((prevIndex) =>
+      prevIndex === 0 ? filteredSongs.length - 1 : prevIndex - 1
+    );
+    setCurrentSong(filteredSongs[currentSongIndex]);
   };
 
   return (
@@ -109,7 +129,13 @@ function App() {
         />
       </div>
 
-      {currentSong && <MusicPlayer song={currentSong} />}
+      {currentSong && (
+        <MusicPlayer
+          song={currentSong}
+          onNext={handleNextSong}
+          onPrevious={handlePreviousSong}
+        />
+      )}
     </div>
   );
 }

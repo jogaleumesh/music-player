@@ -3,13 +3,11 @@ import "./MusicList.css";
 function MusicList({ songs, selectedSongId, onSongClick }) {
   return (
     <ul className="song-list">
-      {songs.map((song) => (
+      {songs.map((song, index) => (
         <li
           key={song.id}
-          className={`song-item ${
-            selectedSongId === song.id ? "selected" : ""
-          }`}
-          onClick={() => onSongClick(song)}
+          className={`song-item ${selectedSongId == song.id ? "selected" : ""}`}
+          onClick={() => onSongClick(index)}
         >
           <img
             src={`https://cms.samespace.com/assets/${song.cover}`}

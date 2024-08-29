@@ -41,3 +41,12 @@ button {
 input:focus-visible {
   outline: none;
 }
+
+::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.6);
+}

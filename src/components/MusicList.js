@@ -2,7 +2,7 @@ import "./MusicList.css";
 
 function MusicList({ songs, selectedSongId, onSongClick }) {
   return (
-    <ul className="song-list">
+    <ul className="songs">
       {songs.map((song, index) => (
         <li
           key={song.id}

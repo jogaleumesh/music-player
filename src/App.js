@@ -14,6 +14,9 @@ function App() {
   const [activeTab, setActiveTab] = useState("forYou"); // Tab state
   const [searchQuery, setSearchQuery] = useState(""); // Search input state
 
+  const [showMenu, setShowMenu] = useState(true);
+  const [showPlayer, setShowPlayer] = useState(true);
+
   // Fetch songs data from API
   useEffect(() => {
     const fetchSongs = async () => {
@@ -35,6 +38,29 @@ function App() {
     };
 
     fetchSongs();
+  }, []);
+
+  useEffect(() => {
+    // Function to check the device width and update showMenu state
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        // Assuming 768px is the tablet breakpoint
+        setShowMenu(false);
+      } else {
+        setShowMenu(true);
+      }
+    };
+
+    // Initial check when the component mounts
+    handleResize();
+
+    // Add event listener to check the width on window resize
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup function to remove the event listener
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   // Function to change tab and filter songs
@@ -70,6 +96,7 @@ function App() {
   const handleSongClick = (index) => {
     setCurrentSongIndex(index);
     setCurrentSong(filteredSongs[index]);
+    handleMenu();
   };
 
   const handleNextSong = () => {
@@ -86,20 +113,33 @@ function App() {
     setCurrentSong(filteredSongs[currentSongIndex]);
   };
 
+  const handleMenu = () => {
+    setShowMenu(!showMenu);
+    setShowPlayer(!showPlayer);
+  };
+
   return (
     <div
       className="app"
       style={{ backgroundColor: currentSong ? currentSong.accent : "#121212" }}
     >
-      <div className="left-nav">
+      <div className="side-menu">
+        <button className="menu-btn" onClick={handleMenu}>
+          <img src="/assets/menu.svg" alt="menu" />
+        </button>
+
         <img src="/assets/logo.svg" alt="logo" />
+
         <img
           src="https://randomuser.me/api/portraits/men/32.jpg"
           className="user-pic"
         />
       </div>
 
-      <div className="music-list">
+      <div
+        className="music-list"
+        style={{ display: showMenu ? "block" : "none" }}
+      >
         <div className="tabs">
           <button
             className={activeTab === "forYou" ? "active" : ""}
@@ -133,13 +173,15 @@ function App() {
         />
       </div>
 
-      {currentSong && (
-        <MusicPlayer
-          song={currentSong}
-          onNext={handleNextSong}
-          onPrevious={handlePreviousSong}
-        />
-      )}
+      <div style={{ display: showPlayer ? "block" : "none" }}>
+        {currentSong && (
+          <MusicPlayer
+            song={currentSong}
+            onNext={handleNextSong}
+            onPrevious={handlePreviousSong}
+          />
+        )}
+      </div>
     </div>
   );
 }

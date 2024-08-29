@@ -64,7 +64,7 @@ function App() {
   }, []);
 
   // Function to change tab and filter songs
-  const handleTabChange = (tab) => {
+  const handleTabClick = (tab) => {
     setSearchQuery("");
     setCurrentSongIndex(0);
     setActiveTab(tab);
@@ -92,8 +92,7 @@ function App() {
     setFilteredSongs(filtered);
   };
 
-  // Function to handle song selection from the list
-  const handleSongClick = (index) => {
+  const handleSongChange = (index) => {
     setCurrentSongIndex(index);
     setCurrentSong(filteredSongs[index]);
     handleMenu();
@@ -114,8 +113,10 @@ function App() {
   };
 
   const handleMenu = () => {
-    setShowMenu(!showMenu);
-    setShowPlayer(!showPlayer);
+    if (window.innerWidth < 768) {
+      setShowMenu(!showMenu);
+      setShowPlayer(!showPlayer);
+    }
   };
 
   return (
@@ -136,40 +137,15 @@ function App() {
         />
       </div>
 
-      <div
-        className="music-list"
-        style={{ display: showMenu ? "block" : "none" }}
-      >
-        <div className="tabs">
-          <button
-            className={activeTab === "forYou" ? "active" : ""}
-            onClick={() => handleTabChange("forYou")}
-          >
-            For You
-          </button>
-          <button
-            className={activeTab === "topTracks" ? "active" : ""}
-            onClick={() => handleTabChange("topTracks")}
-          >
-            Top Tracks
-          </button>
-        </div>
-
-        <div className="search-bar">
-          <input
-            type="text"
-            placeholder="Search Song, Artist"
-            value={searchQuery}
-            onChange={handleSearchChange}
-          />
-
-          <img src="/assets/search.svg" alt="search" className="search-icon" />
-        </div>
-
+      <div style={{ display: showMenu ? "block" : "none" }}>
         <MusicList
           songs={filteredSongs}
           selectedSongId={currentSong?.id}
-          onSongClick={handleSongClick}
+          searchQuery={searchQuery}
+          activeTab={activeTab}
+          onTabClick={handleTabClick}
+          onSearchChange={handleSearchChange}
+          onSongChange={handleSongChange}
         />
       </div>
 

@@ -10,12 +10,6 @@ function MusicPlayer({ song, onNext, onPrevious }) {
 
   useEffect(() => {
     if (song) {
-      // setIsPlaying(false); // Stop playback when switching songs
-      // setCurrentTime(0);
-      // setDuration(0);
-      // audioRef.current.pause(); // Pause current track
-      // audioRef.current.src = song.url; // Set new song source
-
       setCurrentTime(0);
       setDuration(0);
       audioRef.current.src = song.url;

@@ -46,7 +46,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    // Function to check the device width and update showMenu state
+    // function to check the width of the window
     const handleResize = () => {
       if (window.innerWidth <= 768) {
         setShowMenu(false);
@@ -54,14 +54,12 @@ function App() {
         setShowMenu(true);
       }
     };
-
-    // Initial check when the component mounts
     handleResize();
 
-    // Add event listener to check the width on window resize
+    // Add the event listener for window resize
     window.addEventListener("resize", handleResize);
 
-    // Cleanup function to remove the event listener
+    // Cleanup the event listener on component unmount
     return () => {
       window.removeEventListener("resize", handleResize);
     };
@@ -126,7 +124,9 @@ function App() {
   return (
     <div
       className="app"
-      style={{ backgroundColor: currentSong ? currentSong.accent : "#121212" }}
+      style={{
+        background: `linear-gradient(108deg, ${currentSong?.accent}, rgba(0, 0, 0, 0.60) 99.84%), #000`,
+      }}
     >
       <div className="side-menu">
         <button className="menu-btn" onClick={handleMenu}>

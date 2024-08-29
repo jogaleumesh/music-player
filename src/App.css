@@ -1,9 +1,11 @@
 .app {
   display: flex;
+  box-sizing: border-box;
   justify-content: space-between;
-  height: calc(100% - 64px);
+  min-height: 100vh;
   padding: 32px;
   gap: 48px;
+  background: linear-gradient(108deg, rgba(51, 66, 94, 0.60) 2.46%, rgba(0, 0, 0, 0.60) 99.84%), #000;
 }
 
 .menu-btn {

@@ -1,11 +1,16 @@
 import { useState, useEffect } from "react";
 
+import { fetchSongs } from "./services/apiService";
+
 import MusicList from "./components/MusicList";
 import MusicPlayer from "./components/MusicPlayer";
 
 import "./App.css";
 function App() {
   const [songsData, setSongsData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
   const [filteredSongs, setFilteredSongs] = useState([]);
 
   const [currentSong, setCurrentSong] = useState(null); // Current song
@@ -19,32 +24,31 @@ function App() {
 
   // Fetch songs data from API
   useEffect(() => {
-    const fetchSongs = async () => {
+    const getSongs = async () => {
+      setLoading(true);
+      setError(null);
       try {
-        const response = await fetch("https://cms.samespace.com/items/songs");
-        const res = await response.json();
-        const data = res.data;
+        const data = await fetchSongs();
         setSongsData(data);
         setFilteredSongs(data);
 
-        // select the first song by default
         if (data.length > 0) {
           setCurrentSong(data[0]);
-          setCurrentSongIndex(0);
         }
       } catch (error) {
-        console.error("Error fetching songs:", error);
+        setError("Error fetching songs. Please try again later.");
+      } finally {
+        setLoading(false);
       }
     };
 
-    fetchSongs();
+    getSongs();
   }, []);
 
   useEffect(() => {
     // Function to check the device width and update showMenu state
     const handleResize = () => {
-      if (window.innerWidth < 768) {
-        // Assuming 768px is the tablet breakpoint
+      if (window.innerWidth <= 768) {
         setShowMenu(false);
       } else {
         setShowMenu(true);
@@ -129,7 +133,7 @@ function App() {
           <img src="/assets/menu.svg" alt="menu" />
         </button>
 
-        <img src="/assets/logo.svg" alt="logo" />
+        <img className="logo" src="/assets/logo.svg" alt="logo" />
 
         <img
           src="https://randomuser.me/api/portraits/men/32.jpg"
@@ -137,7 +141,10 @@ function App() {
         />
       </div>
 
-      <div style={{ display: showMenu ? "block" : "none" }}>
+      <div
+        className="music-list"
+        style={{ display: showMenu ? "block" : "none" }}
+      >
         <MusicList
           songs={filteredSongs}
           selectedSongId={currentSong?.id}
@@ -149,7 +156,10 @@ function App() {
         />
       </div>
 
-      <div style={{ display: showPlayer ? "block" : "none" }}>
+      <div
+        className="music-player"
+        style={{ display: showPlayer ? "block" : "none" }}
+      >
         {currentSong && (
           <MusicPlayer
             song={currentSong}

@@ -11,13 +11,19 @@
 }
 
 .menu-btn img {
-  height: 32px;
+  height: 100%;
 }
+
 
 .side-menu {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: flex-start;
+}
+
+.logo {
+  height: 48px;
 }
 
 .user-pic {
@@ -31,6 +37,11 @@
   display: none;
 }
 
+.music-list,
+.music-player {
+  flex: 2
+}
+
 
 @media (max-width:768px) {
   .app {
@@ -40,6 +51,11 @@
 
   .menu-btn {
     display: initial;
+    height: 32px;
+  }
+
+  .logo {
+    height: 38px;
   }
 
   .user-pic {
@@ -49,6 +65,7 @@
 
   .side-menu {
     flex-direction: row;
+    align-items: center;
   }
 
 }

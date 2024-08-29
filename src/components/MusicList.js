@@ -10,7 +10,7 @@ function MusicList({
   onSearchChange,
 }) {
   return (
-    <div className="music-list">
+    <>
       <div className="tabs">
         <button
           className={activeTab === "forYou" ? "active" : ""}
@@ -59,7 +59,7 @@ function MusicList({
           </li>
         ))}
       </ul>
-    </div>
+    </>
   );
 }
 

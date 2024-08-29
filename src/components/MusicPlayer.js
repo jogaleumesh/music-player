@@ -55,7 +55,7 @@ function MusicPlayer({ song, onNext, onPrevious }) {
   };
 
   return (
-    <div className="music-player">
+    <div className="player">
       <div className="song-info">
         <h2>{song.name}</h2>
         <p>{song.artist}</p>
